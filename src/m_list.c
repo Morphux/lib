@@ -239,3 +239,44 @@ mlist_t *list_remove(mlist_t *list, void *member, size_t size,
     free(tmp2);
     return list;
 }
+
+vector_string_t *vector_string_init(const char *str1, const char *str2) {
+    vector_string_t       *ret;
+
+    ret = malloc(sizeof(*ret));
+    if (ret == NULL)
+        return NULL;
+
+    ret->str1 = NULL;
+    ret->str2 = NULL;
+
+    if (str1 != NULL)
+        ret->str1 = strdup(str1);
+    if (str2 != NULL)
+        ret->str2 = strdup(str2);
+
+    if (str1 == NULL || str2 == NULL)
+        goto cleanup;
+
+    return ret;
+
+cleanup:
+    if (ret->str1 != NULL)
+        free(ret->str1);
+    if (ret->str2 != NULL)
+        free(ret->str2);
+
+    free(ret);
+    return NULL;
+}
+
+int vector_string_free(void *magic) {
+    vector_string_t *ptr = magic;
+
+    if (ptr != NULL)
+    {
+        free(ptr->str1);
+        free(ptr->str2);
+    }
+    return 1;
+}

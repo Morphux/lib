@@ -32,6 +32,11 @@ typedef struct list_s {
     struct list_s       *head;      /*!< Head of the list */
 } mlist_t;
 
+typedef struct vector_string_s {
+    char        *str1;
+    char        *str2;
+} vector_string_t;
+
 
 /* Defines */
 # define list_add(ptr, member, sizeZ) ptr = list_add_member(ptr, member, sizeZ);
@@ -151,5 +156,17 @@ void *list_get(mlist_t *list, void *member, size_t size);
  */
 mlist_t *list_remove(mlist_t *list, void *member, size_t size,
         int (*free_fn)(void *member));
+
+/*!
+ * \brief Init a vector_string_t with two default values
+ */
+vector_string_t *vector_string_init(const char *str1, const char *str2);
+
+/*!
+ * \brief Free a vector_string_t structure
+ *
+ * \note Can be used as a list_free callback
+ */
+int vector_string_free(void *magic);
 
 #endif
