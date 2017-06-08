@@ -31,6 +31,8 @@
 # define STR_OR_EMPTY(str) (str ? str : "")
 # define STR_NULL_OR_EMPTY(str) (str == NULL || (str != NULL && *str == '\0'))
 
+# define FREE(ptr) free(ptr); ptr = NULL;
+
 /*!
  * \brief Set flags for compilation output
  *
