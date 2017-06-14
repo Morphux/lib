@@ -21,7 +21,6 @@
 # include <stdlib.h> /* malloc */
 # include <assert.h> /* assert */
 # include <string.h> /* mem{cpy,move,cmp} */
-# include <m_types.h>
 
 /* Linked list */
 typedef struct list_s {
@@ -168,5 +167,7 @@ vector_string_t *vector_string_init(const char *str1, const char *str2);
  * \note Can be used as a list_free callback
  */
 int vector_string_free(void *magic);
+
+# include <morphux.h>
 
 #endif

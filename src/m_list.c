@@ -255,7 +255,7 @@ vector_string_t *vector_string_init(const char *str1, const char *str2) {
     if (str2 != NULL)
         ret->str2 = strdup(str2);
 
-    if (str1 == NULL || str2 == NULL)
+    if (ret->str1 == NULL || ret->str2 == NULL)
         goto cleanup;
 
     return ret;

@@ -249,6 +249,30 @@ TEST(list_remove) {
 	return TEST_SUCCESS;
 }
 
+TEST(vector_string_init) {
+    const char  *s1 = "Hello";
+    const char  *s2 = "World !\n";
+    vector_string_t     *tmp = NULL;
+
+    set_malloc_fail(0);
+    TEST_ASSERT(vector_string_init(s1, s2) == NULL, "Malloc failed did not raise an error");
+
+    set_strdup_fail(0);
+    TEST_ASSERT(vector_string_init(s1, s2) == NULL, "strdup failed did not raise an error");
+
+    set_strdup_fail(1);
+    TEST_ASSERT(vector_string_init(s1, s2) == NULL, "strdup failed did not raise an error");
+
+
+    tmp = vector_string_init(s1, s2);
+    TEST_ASSERT(tmp != NULL, "An error hapenned");
+    TEST_ASSERT(strcmp(tmp->str1, s1) == 0, "Strings are not the same");
+    TEST_ASSERT(strcmp(tmp->str2, s2) == 0, "Strings are not the same");
+    vector_string_free(tmp);
+
+    return TEST_SUCCESS;
+}
+
 void	register_list_tests(void) {
 	reg_test("mlist", list_add_null);
 	reg_test("mlist", list_add_member);
@@ -262,4 +286,5 @@ void	register_list_tests(void) {
 	reg_test("mlist", list_size);
 	reg_test("mlist", list_free);
 	reg_test("mlist", list_remove);
+        reg_test("mlist", vector_string_init);
 }
