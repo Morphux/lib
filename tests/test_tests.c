@@ -277,6 +277,18 @@ TEST(test_fail_chdir) {
     return TEST_SUCCESS;
 }
 
+TEST(test_fail_fchmod) {
+    int fd = open("/tmp/truc_12345", O_CREAT | O_RDONLY, 0666);
+
+    TEST_ASSERT(fd != -1, "Could not create file");
+    TEST_ASSERT(fchmod(fd, 0777) != -1, "Should have suceed");
+    set_fchmod_fail(1);
+    TEST_ASSERT(fchmod(fd, 0777) != -1, "Should have suceed");
+    TEST_ASSERT(fchmod(fd, 0777) == -1, "Should have failed");
+    unlink("/tmp/truc_12345");
+    return TEST_SUCCESS;
+}
+
 TEST(test_fail_cleanup) {
 	unlink(TMP_FD_FN);
 	return TEST_SUCCESS;
@@ -302,4 +314,5 @@ void	register_tests_tests(void) {
 	reg_test("fake_functions", test_fail_mkdir);
         reg_test("fake_functions", test_fail_fork);
         reg_test("fake_functions", test_fail_chdir);
+        reg_test("fake_functions", test_fail_fchmod);
 }

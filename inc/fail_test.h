@@ -33,6 +33,7 @@
 # define mkdir(path, mode)      fl_mkdir(path, mode)
 # define fork                   fl_fork
 # define chdir                  fl_chdir
+# define fchmod                 fl_fchmod
 
 # define MOCK_SET_DECL(fn_name, type, ...) \
                             void set_##fn_name##_fail(int val); \
@@ -51,6 +52,7 @@ MOCK_SET_DECL(strcat, char *, char *, const char *);
 MOCK_SET_DECL(mkdir, int, const char *, mode_t);
 MOCK_SET_DECL(fork, pid_t);
 MOCK_SET_DECL(chdir, int, const char *);
+MOCK_SET_DECL(fchmod, int, int, mode_t);
 
 # endif /* M_FAIL_TEST_H */
 #endif /* COMPILE_WITH_TEST */

@@ -96,4 +96,8 @@ MOCK_SET_IMP(chdir, int, -1, const char *path) {
     MOCK_REAL_CALL(chdir, path);
 }
 
+MOCK_SET_IMP(fchmod, int, -1, int fd, mode_t mode) {
+    MOCK_REAL_CALL(fchmod, fd, mode);
+}
+
 #endif /* COMPILE_WITH_TEST */
