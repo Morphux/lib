@@ -251,21 +251,25 @@ vector_string_t *vector_string_init(const char *str1, const char *str2) {
     ret->str2 = NULL;
 
     if (str1 != NULL)
+    {
         ret->str1 = strdup(str1);
-    if (str2 != NULL)
-        ret->str2 = strdup(str2);
+        if (ret->str1 == NULL)
+            goto cleanup;
+    }
 
-    if (ret->str1 == NULL || ret->str2 == NULL)
-        goto cleanup;
+    if (str2 != NULL)
+    {
+        ret->str2 = strdup(str2);
+        if (ret->str2 == NULL)
+            goto cleanup;
+    }
 
     return ret;
 
 cleanup:
-    if (ret->str1 != NULL)
-        free(ret->str1);
-    if (ret->str2 != NULL)
-        free(ret->str2);
 
+    free(ret->str1);
+    free(ret->str2);
     free(ret);
     return NULL;
 }
