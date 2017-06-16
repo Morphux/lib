@@ -269,6 +269,7 @@ TEST(vector_string_init) {
     TEST_ASSERT(strcmp(tmp->str1, s1) == 0, "Strings are not the same");
     TEST_ASSERT(strcmp(tmp->str2, s2) == 0, "Strings are not the same");
     vector_string_free(tmp);
+    free(tmp);
 
     return TEST_SUCCESS;
 }
