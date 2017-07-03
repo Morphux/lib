@@ -22,6 +22,7 @@
 # include <sys/stat.h>
 # include <morphux.h>
 # include <sys/wait.h>
+# include <fail_test.h>
 
 # define COMP_FLAGS_NONE   1 << 0x0
 # define COMP_FLAGS_FILE   1 << 0x1
