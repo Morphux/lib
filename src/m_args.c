@@ -93,6 +93,8 @@ u32_t read_opt(const int ac, char **av, const mopts_t *opts, mlist_t **args) {
                     }
                     else
                     {
+                        /* Function pointer can't be NULL */
+                        assert(opts[it].callback);
                         opts[it].callback(NULL);
                         ret++;
                     }
