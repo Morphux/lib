@@ -34,6 +34,8 @@
 
 # define FREE(ptr) free(ptr); ptr = NULL;
 
+# define COUNTOF(ptr) (sizeof(ptr) / sizeof((ptr)[0]))
+
 /*!
  * \brief Set flags for compilation output
  *
