@@ -186,17 +186,26 @@ void opt_help(const mopts_t *opts, u8_t ret) {
 
     usage(opts);
     m_info("Help:\n");
-    for (u32_t i = 0; opts[i].opt != 0; i++)
+    for (u32_t i = 0; !IS_EOL(opts[i]); i++)
     {
         if (opts[i].s_opt != NULL && (strlen(opts[i].s_opt) + 2) > pad)
             pad = strlen(opts[i].s_opt) + 6;
     }
-    for (u32_t i = 0; opts[i].opt != 0; i++)
+    for (u32_t i = 0; !IS_EOL(opts[i]); i++)
     {
         if (opts[i].s_opt != NULL)
-            m_info("\t-%c, --%s%*s%s\n", opts[i].opt, opts[i].s_opt, pad - (strlen(opts[i].s_opt)), "", opts[i].desc);
+        {
+            if (opts[i].opt != 0)
+                m_info("\t-%c, ", opts[i].opt);
+            else
+                m_info("\t    ");
+
+            fprintf(stdout, "--%s%*s%s\n", opts[i].s_opt, (int)(pad - (strlen(opts[i].s_opt))), "", opts[i].desc);
+        }
         else
+        {
             m_info("\t-%c%*s%s\n", opts[i].opt, pad + 4, "", opts[i].desc);
+        }
     }
     m_info("\t-%c, --%s%*s%s\n", LIB_OPT_TOKEN_HELP, LIB_OPT_STRING_HELP,
         pad - (strlen(LIB_OPT_STRING_HELP)), "", "Show this help");
