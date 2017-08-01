@@ -102,7 +102,7 @@ mlist_t *list_insert_after(mlist_t *org, mlist_t *ptr, void *member, u32_t size)
 }
 
 mlist_t *list_insert_before(mlist_t *org, mlist_t *ptr, void *member, u32_t size) {
-    mlist_t     *n_member, *tmp, *tmp2;
+    mlist_t     *n_member, *tmp2;
 
     /* Allocate the new member */
     n_member = malloc(sizeof(mlist_t));
@@ -121,15 +121,11 @@ mlist_t *list_insert_before(mlist_t *org, mlist_t *ptr, void *member, u32_t size
         return n_member;
     }
 
-    /* Search for the given ptr */
-    for (tmp = org; tmp->next != NULL && tmp != ptr; tmp = tmp->next)
-        ;
-
     /* If the ptr is not in the list, add the new member at the end of head */
-    if (tmp->next == NULL)
+    if (ptr->next == NULL && ptr != org)
     {
-        tmp->next = n_member;
-        n_member->prev = tmp;
+        ptr->next = n_member;
+        n_member->prev = ptr;
     }
     /* If the given ptr is the head, replace the head by the new member */
     else if (ptr == org)
@@ -141,9 +137,9 @@ mlist_t *list_insert_before(mlist_t *org, mlist_t *ptr, void *member, u32_t size
     }
     else
     {
-        tmp2 = tmp->prev;
-        n_member->next = tmp;
-        tmp->prev = n_member;
+        tmp2 = ptr->prev;
+        n_member->next = ptr;
+        ptr->prev = n_member;
         tmp2->next = n_member;
     }
     n_member->head = org;

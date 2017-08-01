@@ -38,7 +38,7 @@ typedef struct vector_string_s {
 
 
 /* Defines */
-# define list_add(ptr, member, sizeZ) ptr = list_add_member(ptr, member, sizeZ);
+# define list_add(ptr, member, sizeZ) ptr = list_add_member(ptr, member, sizeZ)
 
 # define list_for_each(org_list, temp, p_tr)\
             for (temp = org_list, p_tr = temp->member;\
@@ -48,13 +48,13 @@ typedef struct vector_string_s {
             for (temp = list_get_last(org_list), p_tr = temp->member;\
             temp != temp->head && (p_tr = temp->member); temp = temp->prev)
 
-# define list_tail(org_list) list_get_last(org_list);
+# define list_tail(org_list) list_get_last(org_list)
 
-# define list_add_after(org_list, p_tr1, p_tr2, sizeZ) org_list = list_insert_after(org_list, p_tr1, p_tr2, sizeZ);
+# define list_add_after(org_list, p_tr1, p_tr2, sizeZ) org_list = list_insert_after(org_list, p_tr1, p_tr2, sizeZ)
 
-# define list_add_before(org_list, p_tr1, p_tr2, sizeZ) org_list = list_insert_before(org_list, p_tr1, p_tr2, sizeZ);
+# define list_add_before(org_list, p_tr1, p_tr2, sizeZ) org_list = list_insert_before(org_list, p_tr1, p_tr2, sizeZ)
 
-# define list_del(org_list, p_tr1, sizeZ, fn) org_list = list_remove(org_list, p_tr1, sizeZ, fn);
+# define list_del(org_list, p_tr1, sizeZ, fn) org_list = list_remove(org_list, p_tr1, sizeZ, fn)
 
 
 /*!
