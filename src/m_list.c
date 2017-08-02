@@ -121,14 +121,8 @@ mlist_t *list_insert_before(mlist_t *org, mlist_t *ptr, void *member, u32_t size
         return n_member;
     }
 
-    /* If the ptr is not in the list, add the new member at the end of head */
-    if (ptr->next == NULL && ptr != org)
-    {
-        ptr->next = n_member;
-        n_member->prev = ptr;
-    }
     /* If the given ptr is the head, replace the head by the new member */
-    else if (ptr == org)
+    if (ptr == org)
     {
         n_member->next = org;
         n_member->prev = NULL;

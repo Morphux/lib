@@ -144,11 +144,11 @@ TEST(list_add_before) {
 	TEST_ASSERT(!strcmp(tmp->member, "Hello4 !\n"), "Order is wrong.");
 	TEST_ASSERT(!tmp->prev, "Next pointer is wrong.");
 	list_free(ptr, NULL);
-	ptr = NULL;
-	list_add_before(ptr, ptr, test, sizeof(test));
-	TEST_ASSERT(!strcmp(ptr->member, "Hello !\n"), "Head is wrong.");
-	list_add_before(ptr, NULL, test2, sizeof(test2));
-	TEST_ASSERT(!strcmp(ptr->next->member, "Hello2 !\n"), "Tail is wrong.");
+        ptr = NULL;
+
+        list_add_before(ptr, NULL, test, sizeof(test));
+        list_add_before(ptr, ptr, test2, sizeof(test2));
+        list_add_before(ptr, ptr, test2, sizeof(test2));
 	list_free(ptr, NULL);
 	return TEST_SUCCESS;
 }
